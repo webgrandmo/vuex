@@ -12,6 +12,9 @@ const getters = {
 };
 const mutations = {
   setTodos: (state, todos) => (state.todos = todos),
+  setTodo: (state, todo) => {
+    state.todos.unshift(todo);
+  },
 };
 const actions = {
   getTodos: async ({ commit }) => {
@@ -20,6 +23,13 @@ const actions = {
     );
     commit("setTodos", response.data);
     console.log(response.data);
+  },
+  addTodo: async ({ commit }, title) => {
+    const response = await axios.post(
+      "https://jsonplaceholder.typicode.com/todos",
+      { title, completed: false }
+    );
+    commit("setTodo", response.data);
   },
 };
 
