@@ -1,5 +1,7 @@
 <template>
-  <Todos />
+  <div class="container">
+    <Todos />
+  </div>
 </template>
 
 <script>
