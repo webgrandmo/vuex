@@ -15,6 +15,9 @@ const mutations = {
   setTodo: (state, todo) => {
     state.todos.unshift(todo);
   },
+  removeTodo: (state, id) => {
+    state.todos = state.todos.filter((todo) => todo.id !== id);
+  },
 };
 const actions = {
   getTodos: async ({ commit }) => {
@@ -30,6 +33,12 @@ const actions = {
       { title, completed: false }
     );
     commit("setTodo", response.data);
+  },
+  removeTodo: async ({ commit }, id) => {
+    await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+      id,
+    });
+    commit("removeTodo", id);
   },
 };
 
